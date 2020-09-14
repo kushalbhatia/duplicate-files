@@ -22,7 +22,9 @@ def file_duplicates(path):
     dict_of_hashes = {}
     list_of_duplicates = []
     # find complete path
-    for root, directories, files in os.walk(path):
+    for root, dirs, files in os.walk(path):
+        # make copy of dirs list and filter by hidden items using list comprehension
+        dirs[:] = [d for d in dirs if not d.startswith('.')]
         for file in files:
             complete_file_path = os.path.join(root, file)
             # find hash of complete path
@@ -35,6 +37,10 @@ def file_duplicates(path):
                 list_of_duplicates.append(complete_file_path)
                 # only add matched duplicate files to list of duplicates
                 matching_file = dict_of_hashes[hashed_file]
+                if matching_file in list_of_duplicates:
+                    list_of_duplicates.sort()
+                    continue
                 list_of_duplicates.append(matching_file)
-        # return unique list of duplicates by using set()
-        return set(list_of_duplicates)
+
+    # return unique sorted list of duplicates
+    return list_of_duplicates
