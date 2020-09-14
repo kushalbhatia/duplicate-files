@@ -15,7 +15,7 @@ def compute_hash(file):
     return hash_file
 
 
-''' Get complete path of file, find hash of file, and return list of unique duplicates in a given path '''
+''' Get complete path of file, find hash of file, exclude hidden directories, and return list of unique duplicates in a given path '''
 
 
 def file_duplicates(path):
