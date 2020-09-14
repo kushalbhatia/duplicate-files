@@ -15,28 +15,33 @@ def compute_hash(file):
     return hash_file
 
 
-''' Get complete path of file, find hash of file, exclude hidden directories, and return list of unique duplicates in a given path '''
+''' Get complete path of file, exclude hidden directories, find hash of file path, and return list of unique duplicates in a given path '''
 
 
 def file_duplicates(path):
     dict_of_hashes = {}
     list_of_duplicates = []
+    list_of_hidden = []
     # find complete path
-    for root, dirs, files in os.walk(path):
-        # make copy of dirs list and filter by hidden items using list comprehension
-        dirs[:] = [d for d in dirs if not d.startswith('.')]
+    for root, directories, files in os.walk(path):
+        # extract hidden directories and append to empty list of hidden directories
+        for directory in directories:
+            if not directory.startswith('.'):
+                list_of_hidden.append(directory)
+                # replace and copy entire directories list with list of hidden directories to skip and exclude
+                directories[:] = list_of_hidden
         for file in files:
             complete_file_path = os.path.join(root, file)
             # find hash of complete path
-            hashed_file = compute_hash(complete_file_path)
-            # add hashed files to dictionary of hashes
-            if hashed_file not in dict_of_hashes:
-                dict_of_hashes[hashed_file] = complete_file_path
+            hashed_file_path = compute_hash(complete_file_path)
+            # add hashed file paths to dictionary of hashes
+            if hashed_file_path not in dict_of_hashes:
+                dict_of_hashes[hashed_file_path] = complete_file_path
             else:
-                # add duplicate hashed files to list of duplicates
+                # add duplicate hashed file paths to list of duplicates
                 list_of_duplicates.append(complete_file_path)
                 # only add matched duplicate files to list of duplicates
-                matching_file = dict_of_hashes[hashed_file]
+                matching_file = dict_of_hashes[hashed_file_path]
                 if matching_file in list_of_duplicates:
                     list_of_duplicates.sort()
                     continue
