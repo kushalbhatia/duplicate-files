@@ -19,33 +19,33 @@ def compute_hash(file):
 
 
 def file_duplicates(path):
-    dict_of_hashes = {}
-    list_of_duplicates = []
-    list_of_hidden = []
+    hashes_dict = {}
+    duplicates_list = []
+    hidden_list = []
     # find complete path
     for root, directories, files in os.walk(path):
         # extract hidden directories and append to empty list of hidden directories
         for directory in directories:
             if not directory.startswith('.'):
-                list_of_hidden.append(directory)
+                hidden_list.append(directory)
                 # replace and copy entire directories list with list of hidden directories to skip and exclude
-                directories[:] = list_of_hidden
+                directories[:] = hidden_list
         for file in files:
             complete_file_path = os.path.join(root, file)
             # find hash of complete path
             hashed_file_path = compute_hash(complete_file_path)
             # add hashed file paths to dictionary of hashes
-            if hashed_file_path not in dict_of_hashes:
-                dict_of_hashes[hashed_file_path] = complete_file_path
+            if hashed_file_path not in hashes_dict:
+                hashes_dict[hashed_file_path] = complete_file_path
             else:
                 # add duplicate hashed file paths to list of duplicates
-                list_of_duplicates.append(complete_file_path)
+                duplicates_list.append(complete_file_path)
                 # only add matched duplicate files to list of duplicates
-                matching_file = dict_of_hashes[hashed_file_path]
-                if matching_file in list_of_duplicates:
-                    list_of_duplicates.sort()
+                matching_file = hashes_dict[hashed_file_path]
+                if matching_file in duplicates_list:
+                    duplicates_list.sort()
                     continue
-                list_of_duplicates.append(matching_file)
+                duplicates_list.append(matching_file)
 
     # return unique sorted list of duplicates
-    return list_of_duplicates
+    return duplicates_list
