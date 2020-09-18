@@ -2,11 +2,12 @@
 
 import os
 import hashlib
-
+import timeit
 
 ''' Compute and return the hash for a single file '''
 
 
+# errors include FileNotFound, which are caught and skipped
 def compute_hash(file):
     while True:
         try:
@@ -40,8 +41,10 @@ def file_duplicates(path):
                 complete_file_path = os.path.join(root, file)
                 hashed_file_path = compute_hash(complete_file_path)
                 counter += 1
-                print(f'Now printing number {counter}', complete_file_path)
+                print(f'Now printing fil number {counter}', complete_file_path)
 
+            # start timer for function
+            timer = timeit.timeit()
             # add hashed file paths to dictionary of hashes
             if hashed_file_path not in hashes_dict:
                 hashes_dict[hashed_file_path] = complete_file_path
@@ -54,6 +57,8 @@ def file_duplicates(path):
                     duplicates_list.sort()
                     continue
                 duplicates_list.append(matching_file)
+                # end timer for function
+                print(f'My program took {timer} seconds to run!')
 
     # return unique sorted list of duplicates
     return duplicates_list
