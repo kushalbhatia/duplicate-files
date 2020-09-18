@@ -57,7 +57,3 @@ def file_duplicates(path):
 
     # return unique sorted list of duplicates
     return duplicates_list
-
-
-file_duplicates(
-    '/Users/kushal/')
