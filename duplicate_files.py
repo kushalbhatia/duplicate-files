@@ -8,7 +8,6 @@ import hashlib
 
 
 def compute_hash(file):
-    # open and read binary file
     fh = open(file, 'rb')
     content_file = fh.read()
     hash_file = hashlib.sha1(content_file).hexdigest()
@@ -21,18 +20,16 @@ def compute_hash(file):
 def file_duplicates(path):
     hashes_dict = {}
     duplicates_list = []
-    hidden_list = []
+    # case sensitive match
+    ignore_list = ['.git', '.svn']
     # find complete path
     for root, directories, files in os.walk(path):
-        # extract hidden directories and append to empty list of hidden directories
-        for directory in directories:
-            if not directory.startswith('.'):
-                hidden_list.append(directory)
-                # replace and copy entire directories list with list of hidden directories to skip and exclude
-                directories[:] = hidden_list
+        # file can be a file or a directory
         for file in files:
-            complete_file_path = os.path.join(root, file)
+            if file in ignore_list:
+                continue
             # find hash of complete path
+            complete_file_path = os.path.join(root, file)
             hashed_file_path = compute_hash(complete_file_path)
             # add hashed file paths to dictionary of hashes
             if hashed_file_path not in hashes_dict:
@@ -49,3 +46,7 @@ def file_duplicates(path):
 
     # return unique sorted list of duplicates
     return duplicates_list
+
+
+file_duplicates(
+    '/Users/kushal/Software Development Projects/Portfolio Projects/IT Automation/')
