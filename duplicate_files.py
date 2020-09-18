@@ -8,9 +8,13 @@ import hashlib
 
 
 def compute_hash(file):
-    fh = open(file, 'rb')
-    content_file = fh.read()
-    hash_file = hashlib.sha1(content_file).hexdigest()
+    while True:
+        try:
+            fh = open(file, 'rb')
+            content_file = fh.read()
+            hash_file = hashlib.sha1(content_file).hexdigest()
+        except FileNotFoundError:
+            continue
     return hash_file
 
 
@@ -21,16 +25,23 @@ def file_duplicates(path):
     hashes_dict = {}
     duplicates_list = []
     # case sensitive match
-    ignore_list = ['.git', '.svn']
+    ignore_list = ['.git', '.svn', '.DS_Store']
     # find complete path
     for root, directories, files in os.walk(path):
         # file can be a file or a directory
         for file in files:
             if file in ignore_list:
                 continue
-            # find hash of complete path
-            complete_file_path = os.path.join(root, file)
-            hashed_file_path = compute_hash(complete_file_path)
+
+            # add a counter to see how many files are running
+            counter = 0
+            while True:
+                # find hash of complete path
+                complete_file_path = os.path.join(root, file)
+                hashed_file_path = compute_hash(complete_file_path)
+                counter += 1
+                print(f'Now printing number {counter}', complete_file_path)
+
             # add hashed file paths to dictionary of hashes
             if hashed_file_path not in hashes_dict:
                 hashes_dict[hashed_file_path] = complete_file_path
@@ -49,4 +60,4 @@ def file_duplicates(path):
 
 
 file_duplicates(
-    '/Users/kushal/Software Development Projects/Portfolio Projects/IT Automation/')
+    '/Users/kushal/')
