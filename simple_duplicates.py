@@ -29,17 +29,6 @@ def compute_hash(file):
         return False
 
 
-''' Verify if path contains a directory that is in the ignore_directory_list '''
-
-
-# if path contains directory from ignore list, return False, otherwise return True
-def verify_path(path, ignore_directories_list):
-    for ignore_directories in ignore_directories_list:
-        if ignore_directories in path:
-            return False
-    return True
-
-
 ''' Get complete path of file, exclude hidden directories, find hash of file path, and return list of unique duplicates in a given path '''
 
 
@@ -50,8 +39,9 @@ def file_duplicates(path):
         for file in files:
             # find complete file path
             complete_file_path = os.path.join(root, file)
-            # if any of the directories listed in ignore_directories_list are found in complete_file_path, skip it
-            if not verify_path(complete_file_path, ignore_directories_list):
+            print(f'Now printing: {complete_file_path}')
+            # if any of the files/directories listed in ignore_directories_list are found, skip it
+            if file in ignore_directories_list:
                 continue
             # find hash of complete file path
             else:
@@ -76,7 +66,3 @@ def file_duplicates(path):
 
     # return unique sorted list of duplicates
     return duplicate_files_list
-
-
-file_duplicates(
-    '/Users/kushal/Software Development Projects/Test/Duplicates Test/')

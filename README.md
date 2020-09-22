@@ -1,4 +1,4 @@
-# A simple yet powerful program that searches for unique sorted duplicate hashed files on ur computer
+# A simple yet powerful program that searches for unique sorted duplicate hashed files on your computer
 
 1. Import os, hashlib and timeit modules
 
