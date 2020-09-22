@@ -6,8 +6,8 @@ import hashlib
 import timeit
 
 
-hashes_dict = {}
-duplicates_list = []
+hashed_files_dict = {}
+duplicate_files_list = []
 # case sensitive match
 ignore_directories_list = ['.git', '.svn', '.vscode']
 # start timer for program
@@ -34,8 +34,8 @@ def compute_hash(file):
 
 # if path contains directory from ignore list, return False, otherwise return True
 def verify_path(path, ignore_directories_list):
-    for ignore_dirs in ignore_directories_list:
-        if ignore_dirs in path:
+    for ignore_directories in ignore_directories_list:
+        if ignore_directories in path:
             return False
     return True
 
@@ -59,19 +59,19 @@ def file_duplicates(path):
                     continue
 
                 # add hashed file paths to dictionary of hashes
-                if hashed_file_path not in hashes_dict:
-                    hashes_dict[hashed_file_path] = complete_file_path
+                if hashed_file_path not in hashed_files_dict:
+                    hashed_files_dict[hashed_file_path] = complete_file_path
                 else:
                     # add duplicate hashed file paths to list of duplicates
-                    duplicates_list.append(complete_file_path)
+                    duplicate_files_list.append(complete_file_path)
                     # only add matched duplicate files to list of duplicates
-                    matching_file = hashes_dict[hashed_file_path]
-                    if matching_file in duplicates_list:
-                        duplicates_list.sort()
+                    matching_file = hashed_files_dict[hashed_file_path]
+                    if matching_file in duplicate_files_list:
+                        duplicate_files_list.sort()
                         continue
-                    duplicates_list.append(matching_file)
+                    duplicate_files_list.append(matching_file)
                     # end timer for entire program
                     print(f'My program took {timer} seconds to run!')
 
     # return unique sorted list of duplicates
-    return duplicates_list
+    return duplicate_files_list
