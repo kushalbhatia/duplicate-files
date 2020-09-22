@@ -1,17 +1,21 @@
 # A simple yet powerful program that searches for unique sorted duplicate hashed files on ur computer
 
-1. Import os and hashlib modules
+1. Import os, hashlib and timeit modules
 
-2. Look out for exceptions, if caught, skip. Then compute and return hash value for given file by opening and reading binary file, then computing SHA-1 hash
+2. Compute and return hash value for given file by opening and reading binary file, then computing SHA-1 hash. Look out for exceptions; if caught, skip
 
-3. Create an empty dictionary of hashed files, an empty list of duplicate files, and a ignore list of hidden directories
+3. Create an empty dictionary of hashed files, an empty list of duplicate files, an ignore list of hidden directories, and a timer
 
-4. Add a counter to see how many files are running, then get complete path of file by looping through and utilizing the walk function in the os module, then join the root and file
+4. Verify if path contains a folder that is in the ignore_directory_list (you can add to this list if you want)
 
-5. Exclude hidden directories by traversing through all of the "files" (can be directories or files) and compare against ignore_list in a case sensitive manner
+5. Get complete path of file by looping through and utilizing the walk function in the os module, then join the root and file
 
-6. Find out how long function takes to run from start to finish, and add hashed file paths to dictionary of hashed files, and duplicate hashed files to list of duplicate files
+6. If any of the folders listed in ignore_directories_list are found in complete_file_path, then skip
 
-7. Only add matched duplicates to list of duplicate files by skipping additional using continue, and sort
+7. Add hashed file paths to dictionary of hashed files, and duplicate hashed files to list of duplicate files
 
-8. Return unique list of duplicate files
+8. Only add matched duplicates to list of duplicate files by skipping additional using continue, and sort
+
+9. Find out how long program takes to run from start to finish
+
+10. Return unique sorted list of duplicate files by calling the file_duplicates() function

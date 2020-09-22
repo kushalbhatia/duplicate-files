@@ -1,64 +1,77 @@
 ''' Write a Python program which will find duplicate files on your computer '''
 
+
 import os
 import hashlib
 import timeit
 
+
+hashes_dict = {}
+duplicates_list = []
+# case sensitive match
+ignore_directories_list = ['.git', '.svn', '.vscode']
+# start timer for program
+timer = timeit.timeit()
+
+
 ''' Compute and return the hash for a single file '''
 
 
-# errors include FileNotFound, which are caught and skipped
+# if there are any errors, it will catch it and skip it
 def compute_hash(file):
-    while True:
-        try:
-            fh = open(file, 'rb')
-            content_file = fh.read()
-            hash_file = hashlib.sha1(content_file).hexdigest()
-        except FileNotFoundError:
-            continue
-    return hash_file
+    try:
+        fh = open(file, 'rb')
+        content_file = fh.read()
+        hash_file = hashlib.sha1(content_file).hexdigest()
+        return hash_file
+    except Exception as e:
+        print(e)
+        return False
+
+
+''' Verify if path contains a directory that is in the ignore_directory_list '''
+
+
+# if path contains directory from ignore list, return False, otherwise return True
+def verify_path(path, ignore_directories_list):
+    for ignore_dirs in ignore_directories_list:
+        if ignore_dirs in path:
+            return False
+    return True
 
 
 ''' Get complete path of file, exclude hidden directories, find hash of file path, and return list of unique duplicates in a given path '''
 
 
 def file_duplicates(path):
-    hashes_dict = {}
-    duplicates_list = []
-    # case sensitive match
-    ignore_list = ['.git', '.svn', '.DS_Store']
     # find complete path
     for root, directories, files in os.walk(path):
-        # file can be a file or a directory
         for file in files:
-            if file in ignore_list:
+            # find complete file path
+            complete_file_path = os.path.join(root, file)
+            # if any of the folders listed in ignore_directories_list are found in complete_file_path, then skip
+            if not verify_path(complete_file_path, ignore_directories_list):
                 continue
-
-            # add a counter to see how many files are running
-            counter = 0
-            while True:
-                # find hash of complete path
-                complete_file_path = os.path.join(root, file)
-                hashed_file_path = compute_hash(complete_file_path)
-                counter += 1
-                print(f'Now printing fil number {counter}', complete_file_path)
-
-            # start timer for function
-            timer = timeit.timeit()
-            # add hashed file paths to dictionary of hashes
-            if hashed_file_path not in hashes_dict:
-                hashes_dict[hashed_file_path] = complete_file_path
+            # find hash of complete file path
             else:
-                # add duplicate hashed file paths to list of duplicates
-                duplicates_list.append(complete_file_path)
-                # only add matched duplicate files to list of duplicates
-                matching_file = hashes_dict[hashed_file_path]
-                if matching_file in duplicates_list:
-                    duplicates_list.sort()
+                hashed_file_path = compute_hash(complete_file_path)
+                if hashed_file_path == False:
                     continue
-                duplicates_list.append(matching_file)
-                # end timer for function
-                print(f'My program took {timer} seconds to run!')
+
+                # add hashed file paths to dictionary of hashes
+                if hashed_file_path not in hashes_dict:
+                    hashes_dict[hashed_file_path] = complete_file_path
+                else:
+                    # add duplicate hashed file paths to list of duplicates
+                    duplicates_list.append(complete_file_path)
+                    # only add matched duplicate files to list of duplicates
+                    matching_file = hashes_dict[hashed_file_path]
+                    if matching_file in duplicates_list:
+                        duplicates_list.sort()
+                        continue
+                    duplicates_list.append(matching_file)
+                    # end timer for entire program
+                    print(f'My program took {timer} seconds to run!')
 
     # return unique sorted list of duplicates
     return duplicates_list
