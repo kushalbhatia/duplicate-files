@@ -4,7 +4,7 @@
 
 2. Create an empty dictionary of hashed files, an empty list of duplicate files, an ignore list of case-sensitive hidden directories, and a timer
 
-3. Compute and return hash value for given file by opening and reading binary file, then computing SHA-1 hash. Look out for exceptions; if caught, skip
+3. Compute and return hash value for given file by opening and reading binary file, then computing SHA-1 hash. Look out for all exceptions/errors; if caught, skip
 
 4. Verify if path contains a folder that is in the ignore_directory_list (you can add to this list if you want)
 
