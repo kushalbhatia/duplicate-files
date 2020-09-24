@@ -17,7 +17,7 @@ timer = timeit.timeit()
 ''' Compute and return the hash for a single file '''
 
 
-# if there are any errors, it will catch it and skip it
+# try/except will catch all errors and skip it
 def compute_hash(file):
     try:
         fh = open(file, 'rb')
