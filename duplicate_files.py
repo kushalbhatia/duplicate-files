@@ -32,7 +32,7 @@ def compute_hash(file):
 ''' Verify if path contains a directory that is in the ignore_directory_list '''
 
 
-# if path contains directory from ignore list, return False, otherwise return True
+# if path contains a directory from ignore list, return False, otherwise return True
 def verify_path(path, ignore_directories_list):
     for ignore_directories in ignore_directories_list:
         if ignore_directories in path:
