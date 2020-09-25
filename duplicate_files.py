@@ -68,6 +68,7 @@ def file_duplicates(path):
                     duplicate_files_list.sort()
                     continue
                 duplicate_files_list.append(matching_file)
+                # add duplicate files to a separate text file
                 duplicates = open('duplicate_files.txt', 'w')
                 for duplicate_files in duplicate_files_list:
                     duplicates.write(duplicate_files)
