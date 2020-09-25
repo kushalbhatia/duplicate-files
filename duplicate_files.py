@@ -19,12 +19,11 @@ start_time = time.process_time()
 # try/except will catch all errors and skip it
 def compute_hash(file):
     try:
-        fh = open(file, 'rb')
-        content_file = fh.read()
+        binary_file = open(file, 'rb')
+        content_file = binary_file.read()
         hash_file = hashlib.sha1(content_file).hexdigest()
         return hash_file
-    except Exception as e:
-        print(e)
+    except:
         return False
 
 
@@ -69,6 +68,10 @@ def file_duplicates(path):
                     duplicate_files_list.sort()
                     continue
                 duplicate_files_list.append(matching_file)
+                duplicates = open('duplicate_files.txt', 'w')
+                for duplicate_files in duplicate_files_list:
+                    duplicates.write(duplicate_files)
+                duplicates.close()
 
     # return unique sorted list of duplicates
     return duplicate_files_list

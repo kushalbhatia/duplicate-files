@@ -18,4 +18,6 @@
 
 9. Find out how long program takes to run from start to finish
 
-10. Return unique sorted list of duplicate files by calling file_duplicates() function and providing a relative or absolute path
+10. (Optional) Can add all duplicate files to a separate file called duplicate_files.txt
+
+11. Return unique sorted list of duplicate files by calling file_duplicates() function and providing a relative or absolute path
