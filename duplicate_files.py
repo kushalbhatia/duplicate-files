@@ -16,7 +16,7 @@ start_time = time.process_time()
 ''' Compute and return the hash for a single file '''
 
 
-# try/except will catch all errors and skip it
+# try/except block will catch all errors and skip it
 def compute_hash(file):
     try:
         binary_file = open(file, 'rb')
@@ -42,7 +42,14 @@ def verify_path(path, ignore_directories_list):
 
 
 def file_duplicates(path):
-    # find complete path
+    # try/except block to check if file exists:
+    try:
+        filename = 'duplicate_files.txt'
+        duplicates_file_handle = open(filename, 'w')
+    except:
+        print(f'Unable to open: {filename}')
+        exit
+
     for root, directories, files in os.walk(path):
         # if any of the directories listed in ignore_directories_list are found in complete_file_path, skip it
         if not verify_path(root, ignore_directories_list):
@@ -68,11 +75,10 @@ def file_duplicates(path):
                     duplicate_files_list.sort()
                     continue
                 duplicate_files_list.append(matching_file)
-                # add duplicate files to a separate text file
-                duplicates = open('duplicate_files.txt', 'w')
-                for duplicate_files in duplicate_files_list:
-                    duplicates.write(duplicate_files)
-                duplicates.close()
+                # if there is a matched duplicate file, write to duplicate_files.txt separated by new line
+                duplicates_file_handle.write(matching_file + '\n')
+    # close duplicate_files.txt file
+    duplicates_file_handle.close()
 
     # return unique sorted list of duplicates
     return duplicate_files_list
