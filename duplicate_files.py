@@ -6,7 +6,7 @@ import hashlib
 import time
 
 
-hashed_files_dict = {}
+hashed_files_dictionary = {}
 duplicate_files_list = []
 # case sensitive match
 ignore_directories_list = ['.git', '.svn', '.vscode']
@@ -38,7 +38,7 @@ def verify_path(path, ignore_directories_list):
     return True
 
 
-''' Get complete path of file, exclude hidden directories, find hash of file path, and return list of unique duplicates in a given path '''
+''' Create optional text file, get complete path of file, exclude hidden directories, find hash of file path, and return list of unique duplicates in a given path '''
 
 
 def file_duplicates(path):
@@ -63,20 +63,25 @@ def file_duplicates(path):
             if hashed_file_path == False:
                 continue
 
-            # add hashed file paths to dictionary of hashes
-            if hashed_file_path not in hashed_files_dict:
-                hashed_files_dict[hashed_file_path] = complete_file_path
+            # if hashed file path is not already in hashed_files_dictionary, make it into a key in the dictionary
+            if hashed_file_path not in hashed_files_dictionary:
+                hashed_files_dictionary[hashed_file_path] = complete_file_path
             else:
-                # add duplicate hashed file paths to list of duplicates
+                # add duplicate hashed file paths to list of duplicate files
                 duplicate_files_list.append(complete_file_path)
-                # only add matched duplicate files to list of duplicates
-                matching_file = hashed_files_dict[hashed_file_path]
+                # obtain the complete file path (value) of hashed_files_dictionary by giving it the hashed_file_path (key)
+                matching_file = hashed_files_dictionary[hashed_file_path]
+                # if the matching file already exists in duplicate_files_list, skip it
                 if matching_file in duplicate_files_list:
                     duplicate_files_list.sort()
                     continue
+                # append matching file to duplicate_files_list
                 duplicate_files_list.append(matching_file)
-                # if there is a matched duplicate file, write to duplicate_files.txt separated by new line
-                duplicates_file_handle.write(matching_file + '\n')
+
+    # convert duplicate_files_list to string using join() method with a new line
+    duplicate_file_string = '\n'.join(duplicate_files_list)
+    # write each duplicate file string to duplicate_files.txt
+    duplicates_file_handle.write(duplicate_file_string)
     # close duplicate_files.txt file
     duplicates_file_handle.close()
 
@@ -86,3 +91,7 @@ def file_duplicates(path):
 
 # end timer for program
 print(f'My program took {time.process_time() - start_time} seconds to run\n')
+
+
+# call the file duplicates() function and give it an absolute or relative path as the parameter
+file_duplicates('')
