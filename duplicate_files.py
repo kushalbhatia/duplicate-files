@@ -73,11 +73,12 @@ def file_duplicates(path):
                 matching_file = hashed_files_dictionary[hashed_file_path]
                 # if the matching file already exists in duplicate_files_list, skip it
                 if matching_file in duplicate_files_list:
-                    duplicate_files_list.sort()
                     continue
                 # append matching file to duplicate_files_list
                 duplicate_files_list.append(matching_file)
 
+    # sort the list of duplicate files
+    duplicate_files_list.sort()
     # convert duplicate_files_list to string using join() method with a new line
     duplicate_file_string = '\n'.join(duplicate_files_list)
     # write each duplicate file string to duplicate_files.txt
@@ -90,7 +91,8 @@ def file_duplicates(path):
 
 
 # end timer for program
-print(f'My program took {time.process_time() - start_time} seconds to run\n')
+print(
+    f'My program took {time.process_time() - start_time} seconds to run\n')
 
 
 # call the file duplicates() function and give it an absolute or relative path as the parameter

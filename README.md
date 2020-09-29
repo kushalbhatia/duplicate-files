@@ -20,7 +20,7 @@
 
 10. Then obtain the complete file path (value) of hashed_files_dictionary by giving it the hashed_file_path (key) and attach to a variable called matching_file
 
-11. If the matching_file already exists in duplicate_files_list, skip it
+11. If the matching_file already exists in duplicate_files_list, skip it. Then sort duplicate_files_list
 
 12. Within the os.walk() for loop (but outside files for loop), convert duplicate_files_list to strings using the join() method with new line
 
