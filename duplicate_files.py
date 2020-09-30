@@ -3,6 +3,7 @@
 
 import os
 import hashlib
+import csv
 import time
 
 
@@ -51,7 +52,7 @@ def file_duplicates(path):
         exit
 
     for root, directories, files in os.walk(path):
-        # if any of the directories listed in ignore_directories_list are found in complete_file_path, skip it
+        # if any of the directories listed in ignore_directories_list are found in complete_file_path (returns False), skip it
         if not verify_path(root, ignore_directories_list):
             continue
         # file first scans files in root, then scans files in directories
@@ -63,7 +64,7 @@ def file_duplicates(path):
             if hashed_file_path == False:
                 continue
 
-            # if hashed file path is not already in hashed_files_dictionary, make it into a key in the dictionary
+            # if hashed file path is not already in hashed_files_dictionary, it is added as a key inside the dictionary
             if hashed_file_path not in hashed_files_dictionary:
                 hashed_files_dictionary[hashed_file_path] = complete_file_path
             else:
@@ -76,6 +77,14 @@ def file_duplicates(path):
                     continue
                 # append matching file to duplicate_files_list
                 duplicate_files_list.append(matching_file)
+
+    # create a csv file called 'all_files.csv' and write all of your computer files to it to check against the duplicate files
+    with open('all_files.csv', 'w') as csvfile:
+        column_names = ['Hashes', 'Filepaths']
+        writer = csv.DictWriter(csvfile, fieldnames=column_names)
+        writer.writeheader()
+        for hashes, filepaths in hashed_files_dictionary.items():
+            writer.writerow({'Hashes': hashes, 'Filepaths': filepaths})
 
     # sort the list of duplicate files
     duplicate_files_list.sort()

@@ -1,6 +1,6 @@
 # A simple yet powerful program that searches for unique, sorted duplicate hashed files on your computer
 
-1. Import os, hashlib and time modules
+1. Import os, hashlib, csv and time modules
 
 2. Create a global dictionary of hashed files, a global list of duplicate files, a global ignore list of case-sensitive hidden directories, and a timer
 
@@ -14,18 +14,20 @@
 
 7. Find hash of complete_file_path, and if that hashed_file_path does not exist, skip it
 
-8. If hashed_file_path is not already in hashed_files_dictionary, make it into a key in the dictionary and keep looping
+8. If hashed_file_path is not already in hashed_files_dictionary, it is added as a key inside the dictionary
 
 9. If hashed_file_path is already in hashed_files_dictionary, add duplicate hashed file paths to list of duplicate files
 
 10. Then obtain the complete file path (value) of hashed_files_dictionary by giving it the hashed_file_path (key) and attach to a variable called matching_file
 
-11. If the matching_file already exists in duplicate_files_list, skip it. Then sort duplicate_files_list
+11. If the matching_file already exists in duplicate_files_list, skip it
 
-12. Within the os.walk() for loop (but outside files for loop), convert duplicate_files_list to strings using the join() method with new line
+12. Create a csv file called 'all_files.csv' and write all of your computer files to it to check against the duplicate files
 
-13. Write each of those duplicate_file_string to duplicate_files.txt, then close duplicate_files.txt
+13. Within the os.walk() for loop (but outside files for loop), convert duplicate_files_list to strings using the join() method with new line
 
-14. Find out how long program takes to run from start to finish
+14. Write each of those duplicate_file_string to duplicate_files.txt, then close duplicate_files.txt
 
-15. Return unique sorted list of duplicate files by calling file_duplicates() and providing a relative or absolute path
+15. Find out how long program takes to run from start to finish
+
+16. Return unique sorted list of duplicate files by calling file_duplicates() and providing a relative or absolute path
