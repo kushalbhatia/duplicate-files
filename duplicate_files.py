@@ -3,16 +3,16 @@
 
 import os
 import hashlib
-import csv
 import time
 
 
-hashed_files_dictionary = {}
-duplicate_files_list = []
+hashed_files_dict = {}
+duplicate_files_dict = {}
 # case sensitive match
 ignore_directories_list = ['.git', '.svn', '.vscode']
 # start timer for program
 start_time = time.process_time()
+
 
 ''' Compute and return the hash for a single file '''
 
@@ -31,7 +31,7 @@ def compute_hash(file):
 ''' Verify if path contains a directory that is in the ignore_directory_list '''
 
 
-# if path contains a directory from ignore list, return False, otherwise return True
+# if path contains a directory from ignore_directories_list, return False; otherwise return True
 def verify_path(path, ignore_directories_list):
     for ignore_directories in ignore_directories_list:
         if ignore_directories in path:
@@ -46,7 +46,7 @@ def file_duplicates(path):
     # try/except block to check if file exists:
     try:
         filename = 'duplicate_files.txt'
-        duplicates_file_handle = open(filename, 'w')
+        duplicates_fh = open(filename, 'w')
     except:
         print(f'Unable to open: {filename}')
         exit
@@ -64,39 +64,41 @@ def file_duplicates(path):
             if hashed_file_path == False:
                 continue
 
-            # if hashed file path is not already in hashed_files_dictionary, it is added as a key inside the dictionary
-            if hashed_file_path not in hashed_files_dictionary:
-                hashed_files_dictionary[hashed_file_path] = complete_file_path
+            # if hashed file path is not already in hashed_files_dict, complete_file_path is the key and hashed_file_path is the value in hashed_files_dict
+            if hashed_file_path not in hashed_files_dict:
+                hashed_files_dict[complete_file_path] = hashed_file_path
             else:
-                # add duplicate hashed file paths to list of duplicate files
-                duplicate_files_list.append(complete_file_path)
-                # obtain the complete file path (value) of hashed_files_dictionary by giving it the hashed_file_path (key)
-                matching_file = hashed_files_dictionary[hashed_file_path]
-                # if the matching file already exists in duplicate_files_list, skip it
-                if matching_file in duplicate_files_list:
+                # add duplicate complete_file_path to dictionary of duplicate files
+                duplicate_files_dict[complete_file_path] = hashed_file_path
+                #
+                matching_file = hashed_files_dict[hashed_file_path]
+                # if the matching file already exists in duplicate_files_dict, skip it
+                if matching_file in duplicate_files_dict:
                     continue
-                # append matching file to duplicate_files_list
-                duplicate_files_list.append(matching_file)
+                # append matching file to duplicate_files_dict
+                duplicate_files_dict[matching_file] = hashed_file_path
 
-    # create a csv file called 'all_files.csv' and write all of your computer files to it to check against the duplicate files
-    with open('all_files.csv', 'w') as csvfile:
-        column_names = ['Hashes', 'Filepaths']
-        writer = csv.DictWriter(csvfile, fieldnames=column_names)
-        writer.writeheader()
-        for hashes, filepaths in hashed_files_dictionary.items():
-            writer.writerow({'Hashes': hashes, 'Filepaths': filepaths})
+    # write to duplicate_files.txt file the key (complete_file_path) and the value (hashed_file_path) of the duplicate files
+    for complete_file_path, hashed_file_path in duplicate_files_dict.items():
+        duplicates_fh.write(complete_file_path)
+        duplicates_fh.flush()
+        duplicates_fh.write(hashed_file_path)
+        duplicates_fh.flush()
+    duplicates_fh.close()
 
-    # sort the list of duplicate files
-    duplicate_files_list.sort()
-    # convert duplicate_files_list to string using join() method with a new line
-    duplicate_file_string = '\n'.join(duplicate_files_list)
-    # write each duplicate file string to duplicate_files.txt
-    duplicates_file_handle.write(duplicate_file_string)
-    # close duplicate_files.txt file
-    duplicates_file_handle.close()
+    # create a csv file called 'all_files.csv' and write all of your path files to it and compare against the duplicate files
+    all_fh = open('all_files.csv', 'w')
+    all_fh.write('Filepaths,Hashes\n')
+    for complete_file_path, hashed_file_path in hashed_files_dict.items():
+        all_fh.flush()
+        all_fh.write(complete_file_path + ',' + hashed_file_path + '\n')
+        all_fh.flush()
+        # merge the duplicate_files and hashed_files dictionaries
+        duplicate_files_dict.update(hashed_files_dict)
+    all_fh.close()
 
-    # return unique sorted list of duplicates
-    return duplicate_files_list
+    # return unique sorted dictionary of duplicates
+    return sorted(duplicate_files_dict)
 
 
 # end timer for program

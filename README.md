@@ -1,8 +1,8 @@
 # A simple yet powerful program that searches for unique, sorted duplicate hashed files on your computer
 
-1. Import os, hashlib, csv and time modules
+1. Import os, hashlib, and time modules
 
-2. Create a global dictionary of hashed files, a global list of duplicate files, a global ignore list of case-sensitive hidden directories, and a timer
+2. Create a global dictionary of hashed files, a global dictionary of duplicate files, a global ignore list of case-sensitive hidden directories, and a timer
 
 3. Try to compute and return hash value for given file by opening and reading binary file, then computing SHA-1 hash. If file cannot be opened, return false
 
@@ -14,7 +14,7 @@
 
 7. Find hash of complete_file_path, and if that hashed_file_path does not exist, skip it
 
-8. If hashed_file_path is not already in hashed_files_dictionary, it is added as a key inside the dictionary
+8. If hashed file path is not already in hashed_files_dict, complete_file_path is the key and hashed_file_path is the value in hashed_files_dict
 
 9. If hashed_file_path is already in hashed_files_dictionary, add duplicate hashed file paths to list of duplicate files
 
