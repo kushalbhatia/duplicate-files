@@ -30,4 +30,4 @@
 
 15. Find out how long the program takes to run from start to finish
 
-16. Return unique sorted dictionary (only keys - complete_file_paths) of duplicates
+16. Return unique sorted dictionary keys (complete_file_paths) of duplicates
