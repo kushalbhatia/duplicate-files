@@ -106,4 +106,5 @@ print(
 
 
 # call the file duplicates() function and give it an absolute or relative path as the parameter
-file_duplicates('')
+file_duplicates(
+    '/Users/kushal/Software Development Projects/Test/Duplicates Test/')
