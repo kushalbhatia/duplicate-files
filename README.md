@@ -14,20 +14,20 @@
 
 7. Find hash of complete_file_path, and if that hashed_file_path does not exist, skip it
 
-8. If hashed file path is not already in hashed_files_dict, complete_file_path is the key and hashed_file_path is the value in hashed_files_dict
+8. If hashed file path is not already in hashed_files_dict, append the complete_file_path (key) and the hashed_file_path (value) to duplicate_files_dict
 
-9. If hashed_file_path is already in hashed_files_dictionary, add duplicate hashed file paths to list of duplicate files
+9. If there are multiple hashed_file_paths (value), assign the complete_file_path (key) to matching_file
 
-10. Then obtain the complete file path (value) of hashed_files_dictionary by giving it the hashed_file_path (key) and attach to a variable called matching_file
+10. If the matching file key already exists in duplicate_files_dict, skip it
 
-11. If the matching_file already exists in duplicate_files_list, skip it
+11. Append matching_file (key) with hashed_file_path (value) to duplicate_files_dict
 
-12. Create a csv file called 'all_files.csv' and write all of your computer files to it to check against the duplicate files
+12. Write to duplicate_files.txt file using the key (complete_file_path) from duplicate_files_dict
 
-13. Within the os.walk() for loop (but outside files for loop), convert duplicate_files_list to strings using the join() method with new line
+13. Create a csv file called 'all_files.csv' and write all of your path files to it and compare against the duplicate files
 
-14. Write each of those duplicate_file_string to duplicate_files.txt, then close duplicate_files.txt
+14. Merge the duplicate_files and hashed_files dictionaries
 
 15. Find out how long program takes to run from start to finish
 
-16. Return unique sorted list of duplicate files by calling file_duplicates() and providing a relative or absolute path
+16. Return unique sorted dictionary (only keys - complete_file_paths) of duplicates
