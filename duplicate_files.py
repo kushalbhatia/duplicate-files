@@ -21,8 +21,8 @@ start_time = time.process_time()
 def compute_hash(file):
     try:
         binary_file = open(file, 'rb')
-        content_file = binary_file.read()
-        hash_file = hashlib.sha1(content_file).hexdigest()
+        read_binary_file = binary_file.read()
+        hash_file = hashlib.sha1(read_binary_file).hexdigest()
         return hash_file
     except:
         return False

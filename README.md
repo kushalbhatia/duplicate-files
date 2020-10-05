@@ -12,7 +12,7 @@
 
 6. Get the complete path of file by looping through and using the walk function in the os module, then join the root and file
 
-7. Find hash of complete_file_path, and if that hashed_file_path does not exist, skip it
+7. Find the hash of complete_file_path, and if that hashed_file_path does not exist, skip it
 
 8. If hashed file path is not already in hashed_files_dict, append the complete_file_path (key) and the hashed_file_path (value) to duplicate_files_dict
 
