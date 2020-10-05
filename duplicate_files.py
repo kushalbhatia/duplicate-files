@@ -20,7 +20,7 @@ start_time = time.process_time()
 # try/except block will catch all errors and skip it
 def compute_hash(file):
     try:
-        binary_file = open(file, 'rb')
+        binary_file = open(file, 'rb+')
         read_binary_file = binary_file.read()
         hash_file = hashlib.sha1(read_binary_file).hexdigest()
         return hash_file
@@ -105,4 +105,4 @@ file_duplicates('')
 
 # end timer for program
 print(
-    f'My program took {time.process_time() - start_time} seconds to run\n')
+    f'\nMy program took {time.process_time() - start_time} seconds to run')

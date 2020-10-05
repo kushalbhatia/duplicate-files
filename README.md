@@ -4,7 +4,7 @@
 
 2. Create a global dictionary of hashed files, a global dictionary of duplicate files, a global ignore list of case-sensitive hidden directories, and a timer
 
-3. Try to compute and return hash value for given file by opening and reading binary file, then computing SHA-1 hash. If file cannot be opened, return false
+3. Try to compute and return hash value for given file by opening and reading binary+ file, then computing SHA-1 hash. If file cannot be opened, return false
 
 4. Verify if path contains a directory that is in the ignore_directory_list (you can add to this list if you want)
 
