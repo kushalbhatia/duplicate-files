@@ -9,7 +9,7 @@ import time
 hashed_files_dict = {}
 duplicate_files_dict = {}
 # case sensitive match
-ignore_directories_list = ['.git', '.svn', '.vscode']
+ignore_directories_list = ['.git', '.svn', '.vscode', 'cache', 'Cache']
 # start timer for program
 start_time = time.process_time()
 
@@ -59,6 +59,7 @@ def file_duplicates(path):
         for file in files:
             # find complete file path
             complete_file_path = os.path.join(root, file)
+            print(f'Now printing file :{complete_file_path}')
             # find hash of complete file path
             hashed_file_path = compute_hash(complete_file_path)
             if hashed_file_path == False:
@@ -83,7 +84,6 @@ def file_duplicates(path):
     # write to duplicate_files.txt file using the key (complete_file_path) from duplicate_files_dict
     for complete_file_path, hashed_file_path in duplicate_files_dict.items():
         duplicates_fh.write(complete_file_path + '\n')
-        duplicates_fh.flush()
     duplicates_fh.close()
 
     # create a csv file called 'all_files.csv' and write all of your path files to it and compare against the duplicate files
@@ -100,10 +100,9 @@ def file_duplicates(path):
     return sorted(duplicate_files_dict)
 
 
+# call the file duplicates() function and give it an absolute or relative path as the parameter
+file_duplicates('')
+
 # end timer for program
 print(
     f'My program took {time.process_time() - start_time} seconds to run\n')
-
-
-# call the file duplicates() function and give it an absolute or relative path as the parameter
-file_duplicates('')

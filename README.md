@@ -28,6 +28,6 @@
 
 14. Merge the duplicate_files and hashed_files dictionaries
 
-15. Find out how long the program takes to run from start to finish
+15. Return unique sorted dictionary keys (complete_file_paths) of duplicates
 
-16. Return unique sorted dictionary keys (complete_file_paths) of duplicates
+16. Find out how long the program takes to run from start to finish
