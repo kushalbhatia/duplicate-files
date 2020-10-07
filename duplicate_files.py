@@ -1,4 +1,4 @@
-''' Write a Python program which will find duplicate files on your computer '''
+''' Write a Python program which will find duplicate files on your Windows, mac0S or Linux computer '''
 
 
 import os
@@ -8,8 +8,9 @@ import time
 
 hashed_files_dict = {}
 duplicate_files_dict = {}
-# case sensitive match
-ignore_directories_list = ['.git', '.svn', '.vscode', 'cache', 'Cache']
+# program will ignore any directory which matches the directory in ignore_directories_list
+ignore_directories_list = ['.git', '.svn',
+                           '.vscode', 'cache', 'library', 'windows']
 # start timer for program
 start_time = time.process_time()
 
@@ -20,10 +21,10 @@ start_time = time.process_time()
 # try/except block will catch all errors and skip it
 def compute_hash(file):
     try:
-        binary_file = open(file, 'rb+')
+        binary_file = open(file, 'rb')
         read_binary_file = binary_file.read()
-        hash_file = hashlib.sha1(read_binary_file).hexdigest()
-        return hash_file
+        hash_binary_file = hashlib.sha1(read_binary_file).hexdigest()
+        return hash_binary_file
     except:
         return False
 
@@ -33,8 +34,13 @@ def compute_hash(file):
 
 # if path contains a directory from ignore_directories_list, return False; otherwise return True
 def verify_path(path, ignore_directories_list):
-    for ignore_directories in ignore_directories_list:
-        if ignore_directories in path:
+    # split at path (os.sep) will automatically split path at \ for Windows and / for macOS and Linux
+    split_path = path.split(os.sep)
+    # use list comprehension to remove empty items ('') associated with the starting and ending points of a path (\ or /)
+    split_path = [sp for sp in split_path if sp != '']
+    for split in split_path:
+        # lower case string match (Add the .lower() method to convert all directories of path to lowercase)
+        if split.lower() in ignore_directories_list:
             return False
     return True
 
@@ -43,6 +49,8 @@ def verify_path(path, ignore_directories_list):
 
 
 def file_duplicates(path):
+    # start counter
+    count = 0
     # try/except block to check if file exists:
     try:
         filename = 'duplicate_files.txt'
@@ -59,13 +67,15 @@ def file_duplicates(path):
         for file in files:
             # find complete file path
             complete_file_path = os.path.join(root, file)
-            print(f'Now printing file :{complete_file_path}')
-            # find hash of complete file path
+            # process counter
+            count = count + 1
+            print(f'Now processing file number {count}:{complete_file_path}')
+            # find hash of complete_file_path
             hashed_file_path = compute_hash(complete_file_path)
             if hashed_file_path == False:
                 continue
 
-            # if hashed file path is not already in hashed_files_dict, append the complete_file_path (key) and the hashed_file_path (value) to it
+            # if hashed_file_path is not already in hashed_files_dict, append the complete_file_path (key) and the hashed_file_path (value) to it
             if hashed_file_path not in hashed_files_dict.values():
                 hashed_files_dict[complete_file_path] = hashed_file_path
             else:
@@ -75,7 +85,7 @@ def file_duplicates(path):
                 for path, hashed in hashed_files_dict.items():
                     if hashed_file_path == hashed:
                         matching_file = path
-                # if the matching file key already exists in duplicate_files_dict, skip it
+                # if the matching_file key already exists in duplicate_files_dict, skip it
                 if matching_file in duplicate_files_dict:
                     continue
                 # append matching_file (key) with hashed_file_path (value) to duplicate_files_dict
@@ -102,6 +112,7 @@ def file_duplicates(path):
 
 # call the file duplicates() function and give it an absolute or relative path as the parameter
 file_duplicates('')
+
 
 # end timer for program
 print(
