@@ -6,8 +6,9 @@ import hashlib
 import time
 
 
-# my_path scans all directories in given path and reaches the given file
+# my_path scans all directories in the given path and reaches the given file (you must add my_path to any files created below)
 my_path = os.path.dirname(os.path.abspath(__file__))
+
 hashed_files_dict = {}
 duplicate_files_dict = {}
 # program will ignore any directory which matches the directory in ignore_directories_list
