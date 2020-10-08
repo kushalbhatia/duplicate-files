@@ -28,7 +28,7 @@
 
 14. Write to duplicate_files.txt file using the key (complete_file_path) from duplicate_files_dict
 
-15. Create a csv file called 'all_files.csv' and write all of your path files to it and compare against the duplicate files
+15. Create a csv file called 'all_files.csv' and write all of your path files to it (hashed files and duplicate files)
 
 16. Merge the duplicate_files and hashed_files dictionaries
 
@@ -36,4 +36,4 @@
 
 18. Find out how long the program takes to run from start to finish
 
-19. Run program using sudo to run as super-user giving you full administrator privileges, then enter your password for computer
+19. Run program using sudo to run as super-user giving you full administrator privileges, then enter your computer password

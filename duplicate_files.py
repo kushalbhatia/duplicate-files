@@ -94,7 +94,7 @@ def file_duplicates(path):
         duplicates_fh.write(complete_file_path + '\n')
     duplicates_fh.close()
 
-    # create a csv file called 'all_files.csv' and write all of your path files to it and compare against the duplicate files
+    # create a csv file called 'all_files.csv' and write all of your path files to it (hashed files and duplicate files)
     all_fh = open('all_files.csv', 'w')
     all_fh.write('Filepaths,Hashes\n')
     # merge the duplicate_files and hashed_files dictionaries
