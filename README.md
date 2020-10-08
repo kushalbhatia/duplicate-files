@@ -37,3 +37,11 @@
 18. Find out how long the program takes to run from start to finish
 
 19. Run program using sudo to run as super-user giving you full administrator privileges, then enter your computer password
+
+Notes:
+
+*Must be running Python 3.6 or above
+
+*Can be run on Windows, macOS and Linux
+
+*If running via sudo, must use python3, unless you create an alias using the command: alias sudo='sudo '

@@ -34,7 +34,7 @@ def compute_hash(file):
 
 # if path contains a directory from ignore_directories_list, return False; otherwise return True
 def verify_path(path, ignore_directories_list):
-    # split at path (os.sep) will automatically split path at \ for Windows and / for macOS and Linux
+    # split at path (os.sep) will automatically split the path at \ for Windows and / for macOS and Linux
     split_path = path.split(os.sep)
     for split in split_path:
         # Add the .lower() method to convert all directories of path to lowercase and remove blank elements ('') from start and end of path
