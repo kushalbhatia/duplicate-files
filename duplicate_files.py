@@ -6,7 +6,7 @@ import hashlib
 import time
 
 
-# my_path scans all directories in the given path and reaches the given file (you must add my_path to any files created below)
+# my_path scans all directories in the given path and reaches the created file (you must add my_path to any files created below)
 my_path = os.path.dirname(os.path.abspath(__file__))
 
 hashed_files_dict = {}
@@ -112,8 +112,7 @@ def file_duplicates(path):
 
 
 # call the file duplicates() function and give it an absolute or relative path as the parameter
-file_duplicates(
-    '/Users/kushal/Software Development Projects/Test/Duplicates Test/')
+file_duplicates('')
 
 
 # end timer for program
