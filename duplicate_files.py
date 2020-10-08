@@ -114,4 +114,4 @@ file_duplicates('')
 
 # end timer for program
 print(
-    f'\nMy program took {time.process_time() - start_time} seconds to run')
+    f'\nThis program took {time.process_time() - start_time} seconds to run')

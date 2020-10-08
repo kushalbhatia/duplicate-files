@@ -8,7 +8,7 @@
 
 4. Verify if path contains a directory that is in the ignore_directory_list
 
-5. Split the path, (os.sep) will automatically split path at \ for Windows and / for macOS and Linux
+5. Split at path (os.sep) will automatically split the path at \ for Windows and / for macOS and Linux
 
 6. Add the .lower() method to convert all directories of path to lowercase and remove empty items ('') associated with the starting and ending points of a path (\ or /)
 
