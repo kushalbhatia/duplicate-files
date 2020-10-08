@@ -36,11 +36,9 @@ def compute_hash(file):
 def verify_path(path, ignore_directories_list):
     # split at path (os.sep) will automatically split path at \ for Windows and / for macOS and Linux
     split_path = path.split(os.sep)
-    # use list comprehension to remove empty items ('') associated with the starting and ending points of a path (\ or /)
-    split_path = [sp for sp in split_path if sp != '']
     for split in split_path:
-        # lower case string match (Add the .lower() method to convert all directories of path to lowercase)
-        if split.lower() in ignore_directories_list:
+        # Add the .lower() method to convert all directories of path to lowercase and remove blank elements ('') from start and end of path
+        if (split.lower() in ignore_directories_list) and (split != ''):
             return False
     return True
 
@@ -106,8 +104,8 @@ def file_duplicates(path):
         all_fh.flush()
     all_fh.close()
 
-    # return unique sorted dictionary (only keys - complete_file_paths) of duplicates
-    return sorted(duplicate_files_dict)
+    # return unique dictionary (only keys - complete_file_paths) of duplicates
+    return duplicate_files_dict
 
 
 # call the file duplicates() function and give it an absolute or relative path as the parameter
