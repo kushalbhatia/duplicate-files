@@ -54,7 +54,7 @@ def file_duplicates(path):
     count = 0
     # try/except block to check if file exists:
     try:
-        filename = my_path + '/duplicate_files.txt'
+        filename = (my_path + '/duplicate_files.txt')
         duplicates_fh = open(filename, 'w')
     except:
         print(f'Unable to open: {filename}')

@@ -48,4 +48,4 @@ Notes:
 
 *If running via sudo, must use python3, unless you create an alias using the command: alias sudo='sudo '
 
-*Add my_path to both duplicate_files.txt and all_files.csv files to run program from any path
+*Add my_path to both duplicate_files.txt and all_files.csv files to run program from any path and add a / in front of them (__file__ is a built-in constant that is set by the system when the program runs)
