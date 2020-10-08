@@ -2,7 +2,7 @@
 
 1. Import os, hashlib, and time modules
 
-2. Create a dictionary of hashed files, a dictionary of duplicate files, ignore list of directories (you can add to this list if you want) and a timer
+2. Create a global my_path variable, a global dictionary of hashed files, a global dictionary of duplicate files, a global ignore list of directories (you can add to this list if you want) and a timer
 
 3. Try to compute and return hash value for given file by opening and reading binary+ file, then computing SHA-1 hash. If file cannot be opened, return false
 
@@ -45,3 +45,5 @@ Notes:
 *Can be run on Windows, macOS and Linux
 
 *If running via sudo, must use python3, unless you create an alias using the command: alias sudo='sudo '
+
+*Add my_path to both duplicate_files.txt and all_files.csv files to run program from any path

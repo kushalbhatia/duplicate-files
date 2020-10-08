@@ -6,6 +6,8 @@ import hashlib
 import time
 
 
+# my_path scans all directories in given path and reaches the given file
+my_path = os.path.dirname(os.path.abspath(__file__))
 hashed_files_dict = {}
 duplicate_files_dict = {}
 # program will ignore any directory which matches the directory in ignore_directories_list
@@ -51,7 +53,7 @@ def file_duplicates(path):
     count = 0
     # try/except block to check if file exists:
     try:
-        filename = 'duplicate_files.txt'
+        filename = my_path + '/duplicate_files.txt'
         duplicates_fh = open(filename, 'w')
     except:
         print(f'Unable to open: {filename}')
@@ -95,7 +97,7 @@ def file_duplicates(path):
     duplicates_fh.close()
 
     # create a csv file called 'all_files.csv' and write all of your path files to it (hashed files and duplicate files)
-    all_fh = open('all_files.csv', 'w')
+    all_fh = open(my_path + '/all_files.csv', 'w')
     all_fh.write('Filepaths,Hashes\n')
     # merge the duplicate_files and hashed_files dictionaries
     hashed_files_dict.update(duplicate_files_dict)
@@ -109,7 +111,8 @@ def file_duplicates(path):
 
 
 # call the file duplicates() function and give it an absolute or relative path as the parameter
-file_duplicates('')
+file_duplicates(
+    '/Users/kushal/Software Development Projects/Test/Duplicates Test/')
 
 
 # end timer for program
