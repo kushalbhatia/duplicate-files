@@ -2,7 +2,7 @@
 
 1. Import os, hashlib, and time modules
 
-2. Create a global my_path variable, which scans all of the directories in the given path and reaches the created file. Then add my_path to the created files in steps 8 and 16
+2. Create a global my_path variable, which scans all of the directories in the declared path. Then add my_path to the created files in steps 8 and 16
 
 3. Also create a global dictionary of hashed files, a global dictionary of duplicate files, a global ignore list of directories (you can add to this list if you want) and a timer
 
