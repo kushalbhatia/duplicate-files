@@ -3,11 +3,9 @@
 
 import os
 import hashlib
+import argparse
 import time
 
-
-# my_path scans all directories in the declared path (you must add my_path to any files created below)
-my_path = os.path.dirname(os.path.abspath(__file__))
 
 hashed_files_dict = {}
 duplicate_files_dict = {}
@@ -49,18 +47,17 @@ def verify_path(path, ignore_directories_list):
 ''' Create optional text file, get complete path of file, exclude hidden directories, find hash of file path, and return dictionary of unique duplicates in a given path '''
 
 
-def file_duplicates(path):
+def file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv):
     # start counter
     count = 0
     # try/except block to check if file exists:
     try:
-        filename = (my_path + '/duplicate_files.txt')
-        duplicates_fh = open(filename, 'w')
+        duplicates_fh = open(duplicate_files_txt, 'w')
     except:
-        print(f'Unable to open: {filename}')
+        print(f'Unable to open: {duplicate_files_txt}')
         exit
 
-    for root, directories, files in os.walk(path):
+    for root, directories, files in os.walk(starting_directory_name):
         # if any of the directories listed in ignore_directories_list are found in complete_file_path (returns False), skip it
         if not verify_path(root, ignore_directories_list):
             continue
@@ -98,7 +95,7 @@ def file_duplicates(path):
     duplicates_fh.close()
 
     # create a csv file called 'all_files.csv' and write all of your path files to it (hashed files and duplicate files)
-    all_fh = open(my_path + '/all_files.csv', 'w')
+    all_fh = open(all_files_csv, 'w')
     all_fh.write('Filepaths,Hashes\n')
     # merge the duplicate_files and hashed_files dictionaries
     hashed_files_dict.update(duplicate_files_dict)
@@ -111,8 +108,18 @@ def file_duplicates(path):
     return duplicate_files_dict
 
 
-# call the file duplicates() function and give it an absolute or relative path as the parameter
-file_duplicates('')
+# parsing user provided arguments
+parser = argparse.ArgumentParser()
+parser.add_argument('--dir', required=True)
+parser.add_argument('--dup_files', required=True)
+parser.add_argument('--all_files', nargs='?')
+args, unknown = parser.parse_known_args()
+starting_directory_name = args.dir
+duplicate_files_txt = args.dup_files
+all_files_csv = args.all_files
+
+# the file_duplicates function will have a starting directory name, a text file for duplicates, and an optional file for all of the files
+file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv)
 
 
 # end timer for program
