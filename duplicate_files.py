@@ -89,12 +89,12 @@ def file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv)
                 # append matching_file (key) with hashed_file_path (value) to duplicate_files_dict
                 duplicate_files_dict[matching_file] = hashed_file_path
 
-    # write to duplicate_files.txt file using the key (complete_file_path) from duplicate_files_dict
+    # write to a text file that contains duplicate files using the key (complete_file_path) from duplicate_files_dict
     for complete_file_path, hashed_file_path in duplicate_files_dict.items():
         duplicates_fh.write(complete_file_path + '\n')
     duplicates_fh.close()
 
-    # create a csv file called 'all_files.csv' and write all of your path files to it (hashed files and duplicate files)
+    # create a csv file and write all of your path files to it (hashed files and duplicate files)
     all_fh = open(all_files_csv, 'w')
     all_fh.write('Filepaths,Hashes\n')
     # merge the duplicate_files and hashed_files dictionaries
@@ -118,7 +118,7 @@ starting_directory_name = args.dir
 duplicate_files_txt = args.dup_files
 all_files_csv = args.all_files
 
-# the file_duplicates function will have a starting directory name, a text file for duplicates, and an optional file for all of the files
+# the file_duplicates function will have a starting directory name, a text file for duplicates, and an optional csv file for all of the files
 file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv)
 
 

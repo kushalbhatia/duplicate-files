@@ -28,7 +28,7 @@
 
 14. Append matching_file (key) with hashed_file_path (value) to duplicate_files_dict
 
-15. Write to the duplicates text file using the key (complete_file_path) from duplicate_files_dict
+15. Write to a text file that contains duplicate files using the key (complete_file_path) from duplicate_files_dict
 
 16. Create a csv file and write all of your path files to it (hashed files and duplicate files)
 
@@ -38,7 +38,7 @@
 
 19. Create parsed arguments for the three parameters: starting directory, duplicates file, and an optional file for all files
 
-20. The file_duplicates function will have a starting directory name, a text file for duplicates, and an optional file for all of the files
+20. The file_duplicates function will have a starting directory name, a text file for duplicates, and an optional csv file for all of the files
 
 21. Find out how long the program takes to run from start to finish
 
