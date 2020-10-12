@@ -54,7 +54,7 @@ def file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv)
     try:
         duplicates_fh = open(duplicate_files_txt, 'w')
     except:
-        print(f'Unable to open: {duplicate_files_txt}')
+        print(f'Unable to open: {duplicate_files_txt} exiting...')
         exit
 
     for root, directories, files in os.walk(starting_directory_name):
@@ -94,15 +94,16 @@ def file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv)
         duplicates_fh.write(complete_file_path + '\n')
     duplicates_fh.close()
 
-    # create a csv file and write all of your path files to it (hashed files and duplicate files)
-    all_fh = open(all_files_csv, 'w')
-    all_fh.write('Filepaths,Hashes\n')
-    # merge the duplicate_files and hashed_files dictionaries
-    hashed_files_dict.update(duplicate_files_dict)
-    for complete_file_path, hashed_file_path in hashed_files_dict.items():
-        all_fh.write(complete_file_path + ',' + hashed_file_path + '\n')
-        all_fh.flush()
-    all_fh.close()
+    # create a csv file if you want to and write all of your path files to it (hashed files and duplicate files)
+    if all_files_csv:
+        all_fh = open(all_files_csv, 'w')
+        all_fh.write('Filepaths,Hashes\n')
+        # merge the duplicate_files and hashed_files dictionaries
+        hashed_files_dict.update(duplicate_files_dict)
+        for complete_file_path, hashed_file_path in hashed_files_dict.items():
+            all_fh.write(complete_file_path + ',' + hashed_file_path + '\n')
+            all_fh.flush()
+        all_fh.close()
 
     # return unique dictionary (only keys - complete_file_paths) of duplicates
     return duplicate_files_dict
@@ -112,8 +113,8 @@ def file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv)
 parser = argparse.ArgumentParser()
 parser.add_argument('--dir', required=True)
 parser.add_argument('--dup_files', required=True)
-parser.add_argument('--all_files', nargs='?')
-args, unknown = parser.parse_known_args()
+parser.add_argument('--all_files')
+args = parser.parse_args()
 starting_directory_name = args.dir
 duplicate_files_txt = args.dup_files
 all_files_csv = args.all_files

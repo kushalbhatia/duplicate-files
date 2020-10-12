@@ -30,7 +30,7 @@
 
 15. Write to a text file that contains duplicate files using the key (complete_file_path) from duplicate_files_dict
 
-16. Create a csv file and write all of your path files to it (hashed files and duplicate files)
+16. Create a csv file if you want to and write all of your path files to it (hashed files and duplicate files)
 
 17. Merge the duplicate_files and hashed_files dictionaries
 
