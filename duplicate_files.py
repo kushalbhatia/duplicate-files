@@ -67,7 +67,10 @@ def file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv)
             complete_file_path = os.path.join(root, file)
             # process counter
             count = count + 1
-            print(f'Now processing file number {count}:{complete_file_path}')
+            print(f'Processing number {count}: {complete_file_path}')
+            # process file size
+            size_file = os.stat(complete_file_path).st_size
+            print(f'File size: {size_file} bytes\n')
             # find hash of complete_file_path
             hashed_file_path = compute_hash(complete_file_path)
             if hashed_file_path == False:
@@ -112,12 +115,14 @@ def file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv)
 # parsing user provided arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--dir', required=True)
-parser.add_argument('--dup_files', required=True)
-parser.add_argument('--all_files')
+parser.add_argument('--out_duplicate_files', required=True)
+parser.add_argument('--out_processed_files')
+parser.add_argument('--ignore_directories')
 args = parser.parse_args()
 starting_directory_name = args.dir
-duplicate_files_txt = args.dup_files
-all_files_csv = args.all_files
+duplicate_files_txt = args.out_duplicate_files
+all_files_csv = args.out_processed_files
+ignore_directories_list.append(args.ignore_directories)
 
 # the file_duplicates function will have a starting directory name, a text file for duplicates, and an optional csv file for all of the files
 file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv)

@@ -18,31 +18,33 @@
 
 9. Get the complete path of file by looping through and using the walk function in the os module, with starting_directory_name as the parameter, then join the root and file
 
-10. Find the hash of complete_file_path, and if that hashed_file_path does not exist, skip it
+10. Process the counter and process the file size for each file
 
-11. If hashed file path is not already in hashed_files_dict, append the complete_file_path (key) and the hashed_file_path (value) to duplicate_files_dict
+11. Find the hash of complete_file_path, and if that hashed_file_path does not exist, skip it
 
-12. If there are multiple hashed_file_paths (value), assign the complete_file_path (key) to matching_file
+12. If hashed file path is not already in hashed_files_dict, append the complete_file_path (key) and the hashed_file_path (value) to duplicate_files_dict
 
-13. If the matching file key already exists in duplicate_files_dict, skip it
+13. If there are multiple hashed_file_paths (value), assign the complete_file_path (key) to matching_file
 
-14. Append matching_file (key) with hashed_file_path (value) to duplicate_files_dict
+14. If the matching file key already exists in duplicate_files_dict, skip it
 
-15. Write to a text file that contains duplicate files using the key (complete_file_path) from duplicate_files_dict
+15. Append matching_file (key) with hashed_file_path (value) to duplicate_files_dict
 
-16. Create a csv file if you want to and write all of your path files to it (hashed files and duplicate files)
+16. Write to a text file that contains duplicate files using the key (complete_file_path) from duplicate_files_dict
 
-17. Merge the duplicate_files and hashed_files dictionaries
+17. Create a csv file if you want to and write all of your path files to it (hashed files and duplicate files)
 
-18. Return unique dictionary keys (complete_file_paths) of duplicates
+18. Merge the duplicate_files and hashed_files dictionaries
 
-19. Create parsed arguments for the three parameters: starting directory, duplicates file, and an optional file for all files
+19. Return unique dictionary keys (complete_file_paths) of duplicates
 
-20. The file_duplicates function will have a starting directory name, a text file for duplicates, and an optional csv file for all of the files
+20. Create parsed arguments for the four parameters: starting directory, duplicates file, an optional file for all files, and an optional parameter for user created ignored directories
 
-21. Find out how long the program takes to run from start to finish
+21. The file_duplicates function will have a starting directory name, a text file for duplicates, and an optional csv file for all of the files
 
-22. Run program using sudo to run as super-user giving you full administrator privileges, then enter your computer password
+22. Find out how long the program takes to run from start to finish via processing time, not clock time
+
+23. Run program using sudo to run as super-user giving you full administrator privileges, then enter your computer password
 
 Notes:
 
@@ -52,4 +54,6 @@ Notes:
 
 *If running via sudo, must use python3, unless you create an alias using the command: alias sudo='sudo '
 
-*Run program by providing a starting directory (--dir), a duplicates file (--dups_files), and an all files file (--all_files)
+*Run program by providing a starting directory (--dir), a written file for duplicates (--out_duplicate_files), an optional written file for all of the files(--out_processed_files), and an optional user created ignored directories parameter (--ignore_directories)
+
+*This has been thoroughly tested on all of the operating systems listed above. The largest file size was on a Windows machine that had a 6GB file inside of its directory, and the total processing run time for the program was five minutes (at 100,000 files)
