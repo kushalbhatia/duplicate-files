@@ -1,4 +1,4 @@
-''' Write a Python program which will find duplicate files on your Windows, mac0S or Linux computer '''
+''' A Python program which will find duplicate files on your Windows, mac0S or Linux computer '''
 
 import os
 import hashlib
@@ -43,7 +43,7 @@ def verify_path(path, ignore_directories_list):
     return True
 
 
-''' Create optional text file, get complete path of file, exclude hidden directories, find hash of file path, and return dictionary of unique duplicates in a given path '''
+''' Create duplicates text file, get complete path of file, exclude hidden directories, find hash of file path, and return dictionary of unique duplicates in a given path '''
 
 
 def file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv):
@@ -96,7 +96,7 @@ def file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv)
         duplicates_fh.write(complete_file_path + '\n')
     duplicates_fh.close()
 
-    # create a csv file if you want to and write all of your path files to it (hashed files and duplicate files)
+    # create an optional csv file and write all of the path files to it (hashed files and duplicate files)
     if all_files_csv:
         all_fh = open(all_files_csv, 'w')
         all_fh.write('Filepaths,Hashes\n')
@@ -107,7 +107,7 @@ def file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv)
             all_fh.flush()
         all_fh.close()
 
-    # return unique dictionary (only keys - complete_file_paths) of duplicates
+    # return unique dictionary (only keys - complete_file_paths) of duplicate files
     return duplicate_files_dict
 
 

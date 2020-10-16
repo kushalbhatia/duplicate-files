@@ -2,11 +2,11 @@
 
 1. Import os, hashlib, argparse and time modules
 
-2. Also create a global dictionary of hashed files, a global dictionary of duplicate files, a global ignore list of directories (you can add to this list if you want) and a timer
+2. Create a global dictionary of hashed files, a global dictionary of duplicate files, a global ignore list of directories (you can add to this list if you want) and a timer
 
 3. Create a function called compute_hash that computes and returns the hash value for given file by opening and reading the binary file, then computing SHA-1 hash. If file cannot be opened, return false
 
-4. Verify if path contains a directory that is in the ignore_directory_list
+4. Verify if the path contains a directory that is in the ignore_directory_list
 
 5. Split at path (os.sep) will automatically split the path at \ for Windows and / for macOS and Linux
 
@@ -32,11 +32,11 @@
 
 16. Write to a text file that contains duplicate files using the key (complete_file_path) from duplicate_files_dict
 
-17. Create a csv file if you want to and write all of your path files to it (hashed files and duplicate files)
+17. Create an optional csv file and write all of the files in path to it (hashed files and duplicate files)
 
 18. Merge the duplicate_files and hashed_files dictionaries
 
-19. Return unique dictionary keys (complete_file_paths) of duplicates
+19. Return unique dictionary keys (complete_file_paths) of duplicate files
 
 20. Create parsed arguments for four parameters: starting directory, duplicates file, an optional file for all files, and an optional parameter for user created ignored directories
 
@@ -48,7 +48,7 @@
 
 24. Find out how long the program takes to run from start to finish via processing time, not clock time
 
-25. Run program using sudo to run as super-user giving you full administrator privileges, then enter your computer password
+25. Run program using sudo to run as super-user,  granting full administrator privileges, then enter computer password
 
 Notes:
 
@@ -56,7 +56,7 @@ Notes:
 
 *Can be run on Windows, macOS and Linux
 
-*If running via sudo, must use python3, unless you create an alias using the command: alias sudo='sudo '
+*If running via sudo, must use python3, unless an alias is created using the command: alias sudo='sudo '
 
 *Run program by providing a starting directory (--directory), a written file for duplicates (--out_duplicate_files), an optional written file for all of the files(--out_processed_files), and an optional user created ignored directories parameter (--ignore_directories)
 
