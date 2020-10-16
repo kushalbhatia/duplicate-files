@@ -58,6 +58,6 @@ Notes:
 
 *If running via sudo, must use python3, unless you create an alias using the command: alias sudo='sudo '
 
-*Run program by providing a starting directory (--dir), a written file for duplicates (--out_duplicate_files), an optional written file for all of the files(--out_processed_files), and an optional user created ignored directories parameter (--ignore_directories)
+*Run program by providing a starting directory (--directory), a written file for duplicates (--out_duplicate_files), an optional written file for all of the files(--out_processed_files), and an optional user created ignored directories parameter (--ignore_directories)
 
 *This has been thoroughly tested on all of the operating systems listed above. The largest file size was on a Windows machine that had a 6GB file inside of its directory, and the total processing run time for the program was five minutes (100,000 files)

@@ -1,6 +1,5 @@
 ''' Write a Python program which will find duplicate files on your Windows, mac0S or Linux computer '''
 
-
 import os
 import hashlib
 import argparse
@@ -114,12 +113,12 @@ def file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv)
 
 # parsing user provided arguments
 parser = argparse.ArgumentParser()
-parser.add_argument('--dir', required=True)
+parser.add_argument('--directory', required=True)
 parser.add_argument('--out_duplicate_files', required=True)
 parser.add_argument('--out_processed_files')
 parser.add_argument('--ignore_directories')
 args = parser.parse_args()
-starting_directory_name = args.dir
+starting_directory_name = args.directory
 duplicate_files_txt = args.out_duplicate_files
 all_files_csv = args.out_processed_files
 
