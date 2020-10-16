@@ -8,7 +8,7 @@ import time
 
 hashed_files_dict = {}
 duplicate_files_dict = {}
-# program will ignore any directory which matches the directory in ignore_directories_list
+# program will ignore any directory which matches the directory in ignore_directories_list (directories can be added if needed)
 ignore_directories_list = ['.git', '.svn',
                            '.vscode', 'cache', 'library', 'windows']
 # start timer for program

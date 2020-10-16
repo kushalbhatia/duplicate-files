@@ -2,7 +2,7 @@
 
 1. Import os, hashlib, argparse and time modules
 
-2. Create a global dictionary of hashed files, a global dictionary of duplicate files, a global ignore list of directories (you can add to this list if you want) and a timer
+2. Create a global dictionary of hashed files, a global dictionary of duplicate files, a global ignore list of directories (can add to this list if needed) and a timer
 
 3. Create a function called compute_hash that computes and returns the hash value for given file by opening and reading the binary file, then computing SHA-1 hash. If file cannot be opened, return false
 
