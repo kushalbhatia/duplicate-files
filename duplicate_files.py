@@ -122,7 +122,13 @@ args = parser.parse_args()
 starting_directory_name = args.dir
 duplicate_files_txt = args.out_duplicate_files
 all_files_csv = args.out_processed_files
-ignore_directories_list.append(args.ignore_directories)
+
+# if the ignore_directories argument was provided by the user, parse and append those ignored directories to the ignore_directories_list
+if args.ignore_directories:
+    # allow users to add separate ignored directories by ','
+    user_ignore_directories = (args.ignore_directories).split(',')
+    for user_ignore_directory in user_ignore_directories:
+        ignore_directories_list.append(user_ignore_directory)
 
 # the file_duplicates function will have a starting directory name, a text file for duplicates, and an optional csv file for all of the files
 file_duplicates(starting_directory_name, duplicate_files_txt, all_files_csv)

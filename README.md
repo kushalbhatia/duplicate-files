@@ -38,13 +38,17 @@
 
 19. Return unique dictionary keys (complete_file_paths) of duplicates
 
-20. Create parsed arguments for the four parameters: starting directory, duplicates file, an optional file for all files, and an optional parameter for user created ignored directories
+20. Create parsed arguments for four parameters: starting directory, duplicates file, an optional file for all files, and an optional parameter for user created ignored directories
 
-21. The file_duplicates function will have a starting directory name, a text file for duplicates, and an optional csv file for all of the files
+21. If the ignore_directories argument was provided by the user, parse and append those ignored directories to the ignore_directories_list
 
-22. Find out how long the program takes to run from start to finish via processing time, not clock time
+22. Allow users to add separate ignored directories by ','
 
-23. Run program using sudo to run as super-user giving you full administrator privileges, then enter your computer password
+23. The file_duplicates function will have a starting directory name, a text file for duplicates, and an optional csv file for all of the files
+
+24. Find out how long the program takes to run from start to finish via processing time, not clock time
+
+25. Run program using sudo to run as super-user giving you full administrator privileges, then enter your computer password
 
 Notes:
 
@@ -56,4 +60,4 @@ Notes:
 
 *Run program by providing a starting directory (--dir), a written file for duplicates (--out_duplicate_files), an optional written file for all of the files(--out_processed_files), and an optional user created ignored directories parameter (--ignore_directories)
 
-*This has been thoroughly tested on all of the operating systems listed above. The largest file size was on a Windows machine that had a 6GB file inside of its directory, and the total processing run time for the program was five minutes (at 100,000 files)
+*This has been thoroughly tested on all of the operating systems listed above. The largest file size was on a Windows machine that had a 6GB file inside of its directory, and the total processing run time for the program was five minutes (100,000 files)
